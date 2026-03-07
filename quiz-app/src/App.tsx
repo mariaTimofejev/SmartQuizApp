@@ -3,31 +3,40 @@ import { questions } from "./data/questions";
 import QuestionCard from "./components/QuestionCard";
 import ResultTable from "./components/ResultsTable";
 
-function App() {
+function App() {  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [finished, setFinished] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
-  const handleAnswer = (index: number) => {
-    const correct = questions[currentIndex].correctIndex;
+  const restartQuiz = () => {
+  setCurrentIndex(0);
+  setAnswers([]);
+  setFinished(false);
+};
 
-    // kohene tagasiside
-    if (index === correct) {
-      alert("Õige vastus!");
-    } else {
-      alert("Vale vastus!");
-    }
+const handleAnswer = (index: number) => {
+  const correct = questions[currentIndex].correctIndex;
 
-    const newAnswers = [...answers, index];
-    setAnswers(newAnswers);
+  if (index === correct) {
+    setFeedback("Õige vastus!");
+  } else {
+    setFeedback("Vale vastus!");
+  }
+
+  const newAnswers = [...answers, index];
+  setAnswers(newAnswers);
+
+  setTimeout(() => {
+    setFeedback("");
 
     if (currentIndex + 1 < questions.length) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setFinished(true);
     }
-  };
-
+  }, 1000);
+};
   const results = questions.map((q, i) => {
     const selectedIndex = answers[i];
     const isCorrect = selectedIndex === q.correctIndex;
@@ -56,10 +65,13 @@ function App() {
       <h1>Viktoriin</h1>
 
       {!finished ? (
-        <QuestionCard
+        <>
+          <QuestionCard
           question={questions[currentIndex]}
           onAnswer={handleAnswer}
         />
+          {feedback && <p data-testid="feedback">{feedback}</p>}
+        </>
       ) : (
         <>
           <h2>Skoor: {score} / {questions.length}</h2>
@@ -67,8 +79,15 @@ function App() {
           <ResultTable results={results} />
         </>
       )}
+      <>
+        <h2>Skoor: {score} / {questions.length}</h2>
+        <h3>{message}</h3>
+        <ResultTable results={results} />
+        <button onClick={restartQuiz}>
+            Alusta uuesti
+        </button>
+      </>
     </div>
   );
 }
-
 export default App;
