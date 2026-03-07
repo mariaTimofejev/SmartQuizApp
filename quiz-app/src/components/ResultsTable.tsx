@@ -36,31 +36,31 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
               </td>
             </tr>
           ))}
-        </tbody>
-      </table>
+    </tbody>
+  </table>
 
-<style jsx as any>{`
-        .result-table {
-          margin-top: 2rem;
-        }
+  <style>{`
+    .result-table {
+      margin-top: 2rem;
+    }
 
-        table {
-          width: 100%;
-          border-collapse: collapse;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-        th,
-        td {
-          padding: 12px;
-          border-bottom: 1px solid #ddd;
-          text-align: left;
-        }
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
 
-        th {
-          background: #f2f2f2;
-        }
-      `}</style>
-    </div>
+    th {
+      background: #f2f2f2;
+    }
+  `}</style>
+</div>
   );
 };
 

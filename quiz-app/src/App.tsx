@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { questions } from "./questions";
+import { questions } from "./data/questions";
 import QuestionCard from "./components/QuestionCard";
 import ResultTable from "./components/ResultsTable";
 

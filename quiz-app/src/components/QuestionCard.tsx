@@ -1,10 +1,9 @@
-import { type Question } from "../questions";
+import { type Question } from "../data/questions";
 
 type Props = {
   question: Question;
   onAnswer: (index: number) => void;
 };
-
 const QuestionCard = ({ question, onAnswer }: Props) => {
   return (
     <div className="question-card">
